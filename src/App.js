@@ -13,9 +13,10 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get("https://swapi.dev/api/people")
+      .get("https://swapi.dev/api/people/")
       .then((res) => {
-        console.log(res.data.results);
+        console.log("data", res);
+        setData(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -23,6 +24,9 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="Header">Characters</h1>
+      {data.map((character) => {
+        return <Character key={character.url} character={character} />;
+      })}
     </div>
   );
 };
